@@ -25,7 +25,7 @@
                     <div class="club-select">
                         <div class="clubs-list">
                             <p>Выбрать клуб</p>
-                            <ul>
+                            <ul class="clubs-body">
                                 <li><a href="./mozaika.html">Тело мозаика</a></li>
                                 <li><a href="./schelkovo.html">Тело щелково</a></li>
                             </ul>
@@ -306,17 +306,17 @@
             <div class="right">
                 <form action="" id="card_order">
                     <div class="time">
-                        <input id="m1" type="radio" name="card-type" value="1" checked>
+                        <input id="m1" class="card-type" type="radio" name="card-type" value="1" checked>
                         <label for="m1">1 месяц</label>
-                        <input id="m2" type="radio" name="card-type" value="6">
+                        <input id="m2" class="card-type" type="radio" name="card-type" value="6">
                         <label for="m2">6 месяцев</label>
-                        <input id="m3" type="radio" name="card-type" value="9">
+                        <input id="m3" class="card-type" type="radio" name="card-type" value="9">
                         <label for="m3">9 месяцев</label>
-                        <input id="m4" type="radio" name="card-type" value="12">
+                        <input id="m4" class="card-type" type="radio" name="card-type" value="12">
                         <label for="m4">12 месяцев</label>
                     </div>
                     <div class="club">
-                        <input type="radio" id="card_leto_mozaika" name="club-name" value="mozaika" checked><label
+                        <input class="type-club" type="radio" id="card_leto_mozaika" name="club-name" value="mozaika" checked><label
                             for="card_leto_mozaika">
                         <h5>Тело «Мозаика»</h5>
                         <p>Россия, Москва, 7-я Кожуховская ул., 9</p>
@@ -324,21 +324,21 @@
                     </div>
 
                     <div class="club">
-                        <input type="radio" id="card_leto_schelkovo" name="club-name" value="schelkovo"><label
+                        <input class="type-club" type="radio" id="card_leto_schelkovo" name="club-name" value="schelkovo"><label
                             for="card_leto_schelkovo">
                         <h5>Тело «Щелково»</h5>
                         <p>Россия, г. Щелково, ул. Советская, д. 16</p>
                     </label>
                     </div>
                     <div class="price">
-                        <div class="price-message input-text"><input name="name" type="text" required
+                        <div class="price-message input-text"><input class="input-code" name="name" type="text" required
                                                                      placeholder="Промокод"></div>
                         <div class="price-message">Цена:</div>
                         <div class="price-message" id="price-total">2999</div>
                     </div>
                     <input type="hidden" name="form_name" value="Заказать карту">
-                    <p class="input-text"><input name="name" type="text" required placeholder="Ваше имя..."></p>
-                    <p class="input-text"><input type="tel" name="phone" id="callback_form-phone" required
+                    <p class="input-text"><input class="input-name" name="name" type="text" required placeholder="Ваше имя..."></p>
+                    <p class="input-text"><input class="input-phone" type="tel" name="phone" id="callback_form-phone" required
                                                  placeholder="Ваш номер телефона..."></p>
                     <p class="personal-data">
                         <input type="checkbox" required id="card_check"><label for="card_check">Я согласен на обработку
@@ -437,10 +437,10 @@
     <div class="overlay">
     </div>
     <div class="form-wrapper">
-        <div class="close-form">
-            <img src="images/close-icon.png" alt="close" class="close_icon">
-        </div>
         <div class="form-content">
+            <div class="close-form">
+                <img src="images/close-icon.png" alt="close" class="close_icon">
+            </div>
             <form name="callback-form" id="form1" action="#" method="post">
                 <h4>Обратный звонок</h4>
                 <input type="hidden" name="form_name" value=" Обратный звонок">
@@ -463,10 +463,12 @@
     <div class="overlay">
     </div>
     <div class="form-wrapper">
-        <div class="close-form">
-            <img src="images/close-icon.png" alt="close" class="close_icon">
-        </div>
+        
         <div class="form-content">
+            <div class="close-form">
+                <img src="images/close-icon.png" alt="close" class="close_icon">
+            </div>
+
             <form name="free-visit-form" id="form2" action="#" method="post">
                 <h4>Записаться на визит</h4>
                 <input type="hidden" name="form_name" value=" Записаться на визит">
@@ -502,9 +504,6 @@
     <div class="overlay">
     </div>
     <div class="form-wrapper">
-        <div class="close-form">
-            <img src="images/close-icon.png" alt="close" class="close_icon">
-        </div>
         <div class="form-content">
             <h4>У нас для вас есть подарок!</h4>
             <p>Введите промо-код ТЕЛО2019 и получите скидку 30%</p>
