@@ -2257,6 +2257,11 @@ p.personal-data input[type=checkbox]:checked+label:before {
     margin-top: 30px
 }
 
+.active-menu-block {
+    position:fixed;
+    top:0;
+}
+
 @media only screen and (max-width:1199px) {
     .services-slider .slider-arrow.prev {
         left: 25px

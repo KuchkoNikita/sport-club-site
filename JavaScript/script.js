@@ -131,41 +131,6 @@ const calculator = () => {
         licenz: false,
     };
 
-    /*const checkType = () => {
-        typeClub.forEach((item) => {
-            if (item.checked) {
-                subscription.club = item.value;
-            }
-        });
-    };
-    typeClub.forEach(item => {
-        item.addEventListener('change', checkType);
-    });
-
-    const check = () => {
-        cardType.forEach((item) => {
-            if (item.checked) {
-                subscription.card = item.value;
-            }
-        });
-    };
-    cardType.forEach(item => {
-        item.addEventListener('change', check);
-    });
-
-    cardCheck.addEventListener('change', () => {
-        subscription.licenz = cardCheck.checked;
-    });
-    inputCode.addEventListener('change', () => {
-        subscription.code = inputCode.value;
-    });
-    inputName.addEventListener('change', () => {
-        subscription.name = inputName.value;
-    });
-    inputPhone.addEventListener('change', () => {
-        subscription.phone = inputPhone.value;
-    });*/
-
     const subscriptionAssignment = () => {
         cardType.forEach((item) => {
             if (item.checked) {
@@ -186,16 +151,75 @@ const calculator = () => {
     };
 
     const dataСounting = () => {
+        let coast = 0;
+        let discount = 1;
+        const dataSelection = () => {
+            if (subscription.code === 'ТЕЛО2020') { discount = 0.3; }
+            else { discount = 1; }
 
-    }
+            if (subscription.club === 'mozaika') {
+                const oneMonth = 1999,
+                sixMonths = 9900,
+                nineMonth = 13900,
+                twelveMonths = 19900;
+                coast = (subscription.card === '1') ? oneMonth : (subscription.card === '2') ? sixMonths : (subscription.card === '3') ? nineMonth : (subscription.card === '4') ? twelveMonths : ''; 
+            } else if (subscription.club === 'schelkovo') {
+                const oneMonth = 2999,
+                sixMonths = 14900,
+                nineMonth = 21990,
+                twelveMonths = 24990;
+                coast = (subscription.card === '1') ? oneMonth : (subscription.card === '2') ? sixMonths : (subscription.card === '3') ? nineMonth : (subscription.card === '4') ? twelveMonths : ''; 
+            }
+        }
+
+        const dataOutput = () => {
+            priceTotal.textContent = Math.floor(coast * discount);
+        }
+        
+        dataSelection();
+        dataOutput();
+    };
 
     subscriptionAssignment();
+    dataСounting();
     cardOrder.addEventListener('change',() => {
         subscriptionAssignment();
         dataСounting();
-
-        console.log(subscription);
     });
 
 };
 calculator();
+
+const arrow = () => {
+    const totop = document.querySelector('#totop');
+    totop.style.display = 'none';
+
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset >= 700) {
+            totop.style.display = 'block';
+        } else {
+            totop.style.display = 'none';
+        }
+    });
+};
+arrow();
+
+const menuBlock = () => {
+    const topMenu = document.querySelector('.top-menu');
+    
+    
+    window.addEventListener('scroll', function() {
+        if (document.body.clientWidth < 767) {
+            if (window.pageYOffset >= 188) {
+                topMenu.classList.add('active-menu-block');
+            } else {
+                topMenu.classList.remove('active-menu-block');
+            } 
+        } else {
+            if (topMenu.classList.contains('active-menu-block')) {
+                 topMenu.classList.remove('active-menu-block');
+            }
+        }
+    });
+}
+menuBlock();
