@@ -1,9 +1,35 @@
+'use strict';
+
+let deleteMessage;
+let closePopupAfterSendForm;
+let thanksPopup;
+let sorryPopup;
+
 const popup = () => {
     const inputСleaning = (block) => {
         const inputs = block.querySelectorAll('input');
         inputs.forEach((item) => {
-            item.value = '';
+            if (!item.classList.contains('card-type') && !item.classList.contains('type-club')) {
+                item.value = '';   
+            } 
+            if (item.classList.contains('checkbox-dinamic')) {
+                item.checked = false;
+            }
         });
+    };
+
+    deleteMessage = (message, time = 5000) => {
+        setTimeout(() => {
+            message.remove();
+        }, time);
+    };
+
+    closePopupAfterSendForm = (form, time = 5000) => {
+        const popup = form.closest('.popup');
+        setTimeout( () => {
+           popup.style.display = 'none';
+           inputСleaning(form);
+        }, time);
     };
     
     const openingBlock = (button, block, captureContent) => {
@@ -23,7 +49,9 @@ const popup = () => {
             };
 
             requestAnimationFrame( animationBlock );
+            //document.querySelector('.fixed-gift').style.display = 'none';
         });
+
     };
 
     const closingBlock = (button, block, captureContent) => {
@@ -41,7 +69,25 @@ const popup = () => {
                     inputСleaning(block);   
                 }
             }
+           // document.querySelector('.fixed-gift').style.display = 'block';
         });
+    };
+
+    const openingThanksOrSorryPopup = (block, captureContent) => {
+        let count = -20;
+        block.style.display = 'block';
+        captureContent.style.top = '100%';
+    
+        const animationBlock = () => {
+            count++;
+            captureContent.style.top = count+"%";
+            if (count < 20) {
+                requestAnimationFrame( animationBlock );
+            }
+        };
+
+        requestAnimationFrame( animationBlock );
+        //document.querySelector('.fixed-gift').style.display = 'none';
     };
 
     const clubsPopup = () => {
@@ -81,10 +127,11 @@ const popup = () => {
 
         openingBlock(fixedGift, gift, formContent);
         closingBlock('close-btn', gift, '.form-content');
+
         fixedGift.addEventListener('click', () => { 
             fixedGift.style.display = 'none';
         });
-    }
+    };
     giftPopup();
 
     const menuButton = () => {
@@ -99,6 +146,7 @@ const popup = () => {
         closeMenuBtn.addEventListener('click', () => {
             popupMenu.style.display = 'none';
         });
+
         link.forEach(item => {
             item.addEventListener('click', () => {
                 popupMenu.style.display = 'none';
@@ -106,6 +154,61 @@ const popup = () => {
         });        
     };
     menuButton();
+
+    thanksPopup = () => {
+        const thanks = document.querySelector('#thanks');
+        const formContent = thanks.querySelector('.form-content');
+
+        openingThanksOrSorryPopup(thanks, formContent);    
+        closingBlock('close-btn', thanks, '.form-content');
+
+        thanks.style.display = 'block';
+        
+    };
+
+    sorryPopup = () => {
+        const sorry = document.querySelector('#sorry');
+        const formContent = sorry.querySelector('.form-content');
+
+        openingThanksOrSorryPopup(sorry, formContent);    
+        closingBlock('close-btn', sorry, '.form-content');
+
+        sorry.style.display = 'block';
+    };
+
+    /* forms */
+    const bannerForm = () => {
+        const bannerForm = document.querySelector('#banner-form');
+
+        bannerForm.addEventListener('submit', () => {
+            setTimeout( () => {
+                inputСleaning(bannerForm);
+            }, 5000);
+        });
+    };
+    bannerForm();
+
+    const cardOrder = () => {
+        const cardOrder = document.querySelector('#card_order');
+
+        cardOrder.addEventListener('submit', () => {
+            setTimeout( () => {
+                inputСleaning(cardOrder);
+            }, 5000);
+        });
+    };
+    cardOrder();
+
+    const footerForm = () => {
+        const footerForm = document.querySelector('#footer_form');
+
+        footerForm.addEventListener('submit', () => {
+            setTimeout( () => {
+                inputСleaning(footerForm);
+            }, 5000);
+        });
+    };
+    footerForm();
 };
 popup();
 
@@ -117,8 +220,6 @@ const calculator = () => {
     const inputPhone = document.querySelector('.input-phone');
     const cardCheck = document.querySelector('#card_check');
     const typeClub = document.querySelectorAll('.type-club');
-
-
     const cardOrder = document.querySelector('#card_order');
 
     const subscription = {
@@ -154,27 +255,33 @@ const calculator = () => {
         let coast = 0;
         let discount = 1;
         const dataSelection = () => {
-            if (subscription.code === 'ТЕЛО2020') { discount = 0.3; }
-            else { discount = 1; }
-
             if (subscription.club === 'mozaika') {
                 const oneMonth = 1999,
                 sixMonths = 9900,
                 nineMonth = 13900,
                 twelveMonths = 19900;
-                coast = (subscription.card === '1') ? oneMonth : (subscription.card === '2') ? sixMonths : (subscription.card === '3') ? nineMonth : (subscription.card === '4') ? twelveMonths : ''; 
+                coast = (subscription.card === '1') ? oneMonth : (subscription.card === '6') ?
+                sixMonths : (subscription.card === '9') ?
+                nineMonth : (subscription.card === '12') ?
+                twelveMonths : ''; 
             } else if (subscription.club === 'schelkovo') {
                 const oneMonth = 2999,
                 sixMonths = 14900,
                 nineMonth = 21990,
                 twelveMonths = 24990;
-                coast = (subscription.card === '1') ? oneMonth : (subscription.card === '2') ? sixMonths : (subscription.card === '3') ? nineMonth : (subscription.card === '4') ? twelveMonths : ''; 
+                coast = (subscription.card === '1') ? oneMonth : (subscription.card === '6') ?
+                sixMonths : (subscription.card === '9') ?
+                nineMonth : (subscription.card === '12') ?
+                twelveMonths : ''; 
             }
-        }
+
+            if (subscription.code === 'ТЕЛО2020') { discount = 0.3 * coast; }
+            else { discount = ''; }
+        };
 
         const dataOutput = () => {
-            priceTotal.textContent = Math.floor(coast * discount);
-        }
+            priceTotal.textContent = Math.floor(coast - discount);
+        };
         
         dataSelection();
         dataOutput();
@@ -221,5 +328,67 @@ const menuBlock = () => {
             }
         }
     });
-}
+};
 menuBlock();
+
+const sendForm = () => {
+    const errorMessage = 'Что-то пошло не так...';
+    const loadMessage = 'Загрузка...';
+    const successMessage = 'Спасибо! Мы скоро с вами свяжемся';
+
+    const popupForm = document.querySelectorAll('.popup-form');
+    const staticForm = document.querySelectorAll('.static-form');
+
+    const statusMassage = document.createElement('div');
+    statusMassage.style.cssText = 'font-size: 2rem;';
+
+    const postData = (obj) => {
+        return fetch('./server.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(obj),
+        });
+    };
+
+    const messagePost = (form) => {
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            form.appendChild(statusMassage);
+            if (form.classList.contains('popup-form')) { statusMassage.textContent = loadMessage; }
+                
+            let body = {};
+            if (form.id === 'card_order'){
+                body = {coast: document.querySelector('#price-total').textContent};
+            } 
+            const formData = new FormData(form);
+            formData.forEach( (value, key) => {
+                if (key !== 'form_name') { body[key] = value; }
+            });
+                
+            postData(body)
+                .then((response) => {
+                    if (response.status !== 200) {
+                        throw new Error('status network not 200');
+                    }
+                    
+                    if (form.classList.contains('static-form')) { thanksPopup(); }
+                    else { statusMassage.textContent = successMessage; }
+                }) 
+                .catch( (error) => {
+                    if (form.classList.contains('static-form')) { sorryPopup(); }
+                    else { statusMassage.textContent = errorMessage; }
+                    console.warn(error);
+                }); 
+            
+            deleteMessage(statusMassage, 5000);
+            if (form.classList.contains('popup-form')) { closePopupAfterSendForm(form, 5000); }
+        });
+    };
+
+    popupForm.forEach( (item) => messagePost(item));
+    staticForm.forEach((item) => messagePost(item));
+
+};
+sendForm();

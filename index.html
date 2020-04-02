@@ -201,13 +201,13 @@
     <div class="wrapper">
         <h2>Записаться на бесплатный&nbsp;визит</h2>
         <div class="form-wrapper">
-            <form name="banner-form" id="banner-form" action="#" method="post">
+            <form class="static-form" name="banner-form" id="banner-form" action="#" method="post">
                 <input type="hidden" name="form_name" value=" Записаться на визит">
                 <input name="name" type="text" required placeholder="Ваше имя...">
                 <input type="tel" name="phone" id="phone" required placeholder="Ваш номер телефона...">
                 <button name="send" class="btn" type="submit">Записаться</button>
                 <p class="personal-data">
-                    <input type="checkbox" required id="check1"><label for="check1">Я согласен на обработку персональных
+                    <input class="checkbox-dinamic" type="checkbox" required id="check1"><label for="check1">Я согласен на обработку персональных
                     данных</label>
                 </p>
             </form>
@@ -304,15 +304,15 @@
                 <img src="images/cards.png" alt="Клубные карты">
             </div>
             <div class="right">
-                <form action="" id="card_order">
+                <form class="static-form" action="" id="card_order">
                     <div class="time">
                         <input id="m1" class="card-type" type="radio" name="card-type" value="1" checked> <!--1-->
                         <label for="m1">1 месяц</label>
-                        <input id="m2" class="card-type" type="radio" name="card-type" value="2"> <!--6-->
+                        <input id="m2" class="card-type" type="radio" name="card-type" value="6"> <!--6-->
                         <label for="m2">6 месяцев</label>
-                        <input id="m3" class="card-type" type="radio" name="card-type" value="3"> <!--9-->
+                        <input id="m3" class="card-type" type="radio" name="card-type" value="9"> <!--9-->
                         <label for="m3">9 месяцев</label>
-                        <input id="m4" class="card-type" type="radio" name="card-type" value="4"> <!--12-->
+                        <input id="m4" class="card-type" type="radio" name="card-type" value="12"> <!--12-->
                         <label for="m4">12 месяцев</label>
                     </div>
                     <div class="club">
@@ -341,7 +341,7 @@
                     <p class="input-text"><input class="input-phone" type="tel" name="phone" id="callback_form-phone" required
                                                  placeholder="Ваш номер телефона..."></p>
                     <p class="personal-data">
-                        <input type="checkbox" required id="card_check"><label for="card_check">Я согласен на обработку
+                        <input class="checkbox-dinamic" type="checkbox" required id="card_check"><label for="card_check">Я согласен на обработку
                         персональных данных</label>
                     </p>
                     <p class="submit">
@@ -375,19 +375,19 @@
                 </div>
             </div>
             <div class="right">
-                <form action="" id="footer_form">
+                <form class="static-form" action="" id="footer_form">
                     <div class="content">
                         <div class="choose-club">
                             <h5>Выбрать клуб</h5>
                             <div class="club">
-                                <input type="radio" id="footer_leto_mozaika" name="club-name" value="mozaika"><label
+                                <input class="checkbox-dinamic" type="radio" id="footer_leto_mozaika" name="club-name" value="mozaika"><label
                                     for="footer_leto_mozaika">
                                 <h6>Тело «Мозаика»</h6>
                                 <p>Россия, Москва, 7-я Кожуховская ул.,&nbsp;9</p>
                             </label>
                             </div>
                             <div class="club">
-                                <input type="radio" id="footer_leto_schelkovo" name="club-name" value="schelkovo"><label
+                                <input class="checkbox-dinamic" type="radio" id="footer_leto_schelkovo" name="club-name" value="schelkovo"><label
                                     for="footer_leto_schelkovo">
                                 <h6>Тело «Щелково»</h6>
                                 <p>Россия, г. Щелково, ул. Советская, д.&nbsp;16</p>
@@ -441,7 +441,7 @@
             <div class="close-form">
                 <img src="images/close-icon.png" alt="close" class="close_icon">
             </div>
-            <form name="callback-form" id="form1" action="#" method="post">
+            <form class="popup-form" name="callback-form" id="form1" action="#" method="post">
                 <h4>Обратный звонок</h4>
                 <input type="hidden" name="form_name" value=" Обратный звонок">
                 <!--  <input type="hidden" name="club" value="<?=$_GET['club-name']?>"> -->
@@ -449,7 +449,7 @@
                 <p class="input-text"><input type="tel" name="phone" id="callback_form1-phone" required
                                              placeholder="Ваш номер телефона..."></p>
                 <p class="personal-data">
-                    <input type="checkbox" required id="check"><label for="check">Я согласен на обработку <br>персональных
+                    <input class="checkbox-dinamic" type="checkbox" required id="check"><label for="check">Я согласен на обработку <br>персональных
                     данных</label>
 
                 </p>
@@ -469,14 +469,14 @@
                 <img src="images/close-icon.png" alt="close" class="close_icon">
             </div>
 
-            <form name="free-visit-form" id="form2" action="#" method="post">
+            <form class="popup-form" name="free-visit-form" id="form2" action="#" method="post">
                 <h4>Записаться на визит</h4>
                 <input type="hidden" name="form_name" value=" Записаться на визит">
                 <p class="input-text"><input name="name" type="text" required placeholder="Ваше имя..."></p>
                 <p class="input-text"><input type="tel" name="phone" id="callback_form2-phone" required
                                              placeholder="Ваш номер телефона..."></p>
                 <p class="personal-data">
-                    <input type="checkbox" required id="check2"><label for="check2">Я согласен на обработку <br>персональных
+                    <input class="checkbox-dinamic" type="checkbox" required id="check2"><label for="check2">Я согласен на обработку <br>персональных
                     данных</label>
 
                 </p>
@@ -490,12 +490,20 @@
     <div class="overlay">
     </div>
     <div class="form-wrapper">
-        <div class="close-form">
-            <img src="images/close-icon.png" alt="close" class="close_icon">
-        </div>
         <div class="form-content">
             <h4>Спасибо!</h4>
             <p>Ваша заявка отправлена. <br> Мы свяжемся с вами в ближайшее время.</p>
+            <button class="btn close-btn">OK</button>
+        </div>
+    </div>
+</div>
+<div class="popup" id="sorry">
+    <div class="overlay">
+    </div>
+    <div class="form-wrapper">
+        <div class="form-content">
+            <h4>Извините!</h4>
+            <p>Ваша заявка не отправлена. <br> Мы иправим неполадки в кратчайшее время.</p>
             <button class="btn close-btn">OK</button>
         </div>
     </div>
