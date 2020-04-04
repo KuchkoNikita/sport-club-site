@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="css/style.min.css">
 </head>
 <body>
+<div class="container">
 <div class="fixed-gift">
     <img src=images/gift.png alt>
 </div>
-<header class="header-main">
+<header id="header-main" class="header-main">
     <div class="head">
         <div class="wrapper">
             <div class="head-main">
@@ -81,7 +82,7 @@
         </div>
         <div class="wrapper">
             <div class="main-slider">
-                <div class="slide">
+                <div class="slide slide-active">
                     <div class="slide-text">
                         <div class="offer-head">
                             <p class="top">2 круглосуточные</p>
@@ -95,7 +96,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="slide type2" style="display: none">
+                <div class="slide type2" >
                     <div class="slide-text">
                         <div class="offer-head">
                             <p class="top">открытый чемпионат</p>
@@ -109,7 +110,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="slide" style="display: none">
+                <div class="slide">
                     <div class="slide-text">
                         <div class="offer-head">
                             <p class="top">без выходных</p>
@@ -119,12 +120,12 @@
                         </div>
                         <div class="validity">
                             <p> Записаться по телефону:
-                                </p>
+                            </p>
                             <span>+7 (800) 555-64-47</span>
                         </div>
                     </div>
                 </div>
-                <div class="slide type2 type3" style="display: none">
+                <div class="slide type2 type3">
                     <div class="slide-text">
                         <div class="offer-head">
                             <p class="top">Круглосуточно</p>
@@ -133,12 +134,12 @@
                         </div>
                         <div class="validity">
                             <p> Записаться по телефону:
-                                </p>
+                            </p>
                             <span>+7 (800) 555-64-47</span>
                         </div>
                     </div>
                 </div>
-                <div class="slide type2"  style="display: none">
+                <div class="slide type2">
                     <div class="slide-text">
                         <div class="offer-head">
                             <p class="top">Пробное занятие</p>
@@ -152,8 +153,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
+
         </div>
 
     </div>
@@ -203,8 +204,8 @@
         <div class="form-wrapper">
             <form class="static-form" name="banner-form" id="banner-form" action="#" method="post">
                 <input type="hidden" name="form_name" value=" Записаться на визит">
-                <input name="name" type="text" required placeholder="Ваше имя...">
-                <input type="tel" name="phone" id="phone" required placeholder="Ваш номер телефона...">
+                <input name="name" type="text" placeholder="Ваше имя..." required pattern = "^[а-яА-ЯёЁ ?]+$">
+                <input type="tel" name="phone" id="phone" placeholder="Ваш номер телефона..." required pattern = "^\+375( )?(( )?\d){9}$|^\+?[78]([-()]*\d){10}$">
                 <button name="send" class="btn" type="submit">Записаться</button>
                 <p class="personal-data">
                     <input class="checkbox-dinamic" type="checkbox" required id="check1"><label for="check1">Я согласен на обработку персональных
@@ -219,27 +220,27 @@
     <div class="wrapper">
         <h2>услуги наших клубов</h2>
         <div class="services-slider">
-            <div class="slide">
+            <div class="slide slide-active">
                 <img src="images/services-slider/akva.jpg" alt="Аква территория">
                 <h6>Аква территория</h6>
                 <p>Плавание полезно для людей абсолютно любой возрастной категории. Бассейн 5 на 6 метров.</p>
             </div>
-            <div class="slide">
+            <div class="slide slide-active">
                 <img src="images/services-slider/vesy.jpg" alt="Зона свободных весов">
                 <h6>Зона свободных весов</h6>
                 <p>Здесь есть всё необходимое, чтобы достичь максимальных результатов</p>
             </div>
-            <div class="slide">
+            <div class="slide slide-active">
                 <img src="images/services-slider/TRX.jpg" alt="Зона TRX">
                 <h6>Зона TRX</h6>
                 <p>Укрепление суставов и связок, увеличение мышечной массы, выносливости и гибкости</p>
             </div>
-            <div class="slide">
+            <div class="slide slide-active">
                 <img src="images/services-slider/kardio.jpg" alt="Кардиозона">
                 <h6>Кардиозона</h6>
                 <p>Эффективное снижение веса и улучшение работы сердечно-сосудистой системы</p>
             </div>
-            <div class="slide">
+            <div class="slide slide-active">
                 <img src="images/services-slider/yoga.jpg" alt="Йога">
                 <h6>Йога</h6>
                 <p>Йога - идеальны не только физическая форма, но и эмоциональное состояние</p>
@@ -277,7 +278,7 @@
     <div class="gallery-bg">
         <div class="wrapper">
             <div class="gallery-slider">
-                <div class="slide">
+                <div class="slide slide-active">
                     <img src="images/gallery/photo1.jpg" alt="">
                 </div>
                 <div class="slide">
@@ -337,9 +338,8 @@
                         <div class="price-message" id="price-total">2999</div>
                     </div>
                     <input type="hidden" name="form_name" value="Заказать карту">
-                    <p class="input-text"><input class="input-name" name="name" type="text" required placeholder="Ваше имя..."></p>
-                    <p class="input-text"><input class="input-phone" type="tel" name="phone" id="callback_form-phone" required
-                                                 placeholder="Ваш номер телефона..."></p>
+                    <p class="input-text"><input class="input-name" name="name" type="text" placeholder="Ваше имя..." required pattern = "^[а-яА-ЯёЁ ?]+$"></p>
+                    <p class="input-text"><input class="input-phone" type="tel" name="phone" id="callback_form-phone" placeholder="Ваш номер телефона..." required pattern = "^\+375( )?(( )?\d){9}$|^\+?[78]([-()]*\d){10}$"></p>
                     <p class="personal-data">
                         <input class="checkbox-dinamic" type="checkbox" required id="card_check"><label for="card_check">Я согласен на обработку
                         персональных данных</label>
@@ -397,8 +397,7 @@
                         <div class="call">
                             <p>Единый телефон</p>
                             <p class="tel">+7 (800) 555-64-47</p>
-                            <p class="input-text"><input type="tel" name="phone" id="callback_footer_form-phone"
-                                                         required="" placeholder="Ваш номер телефона..."></p>
+                            <p class="input-text"><input type="tel" name="phone" id="callback_footer_form-phone" placeholder="Ваш номер телефона..." required pattern = "^\+375( )?(( )?\d){9}$|^\+?[78]([-()]*\d){10}$"></p>
 
                             <button class="btn callback-btn" type="submit" data-popup="#callback_form">Перезвоните мне
                             </button>
@@ -429,8 +428,9 @@
     </div>
 
 </footer>
+</div> <!--container -->
 <div class="wrapper">
-    <a href="#" id="totop"><i class="fa fa-arrow-up" aria-hidden="true"></i>
+    <a href="#header-main" id="totop"><i class="fa fa-arrow-up" aria-hidden="true"></i>
     </a>
 </div>
 <div class="popup" id="callback_form">
@@ -445,9 +445,8 @@
                 <h4>Обратный звонок</h4>
                 <input type="hidden" name="form_name" value=" Обратный звонок">
                 <!--  <input type="hidden" name="club" value="<?=$_GET['club-name']?>"> -->
-                <p class="input-text"><input name="name" type="text" required placeholder="Ваше имя..."></p>
-                <p class="input-text"><input type="tel" name="phone" id="callback_form1-phone" required
-                                             placeholder="Ваш номер телефона..."></p>
+                <p class="input-text"><input name="name" type="text" placeholder="Ваше имя..." required pattern = "^[а-яА-ЯёЁ ?]+$"></p>
+                <p class="input-text"><input type="tel" name="phone" id="callback_form1-phone" placeholder="Ваш номер телефона..." required pattern = "^\+375( )?(( )?\d){9}$|^\+?[78]([-()]*\d){10}$"></p>
                 <p class="personal-data">
                     <input class="checkbox-dinamic" type="checkbox" required id="check"><label for="check">Я согласен на обработку <br>персональных
                     данных</label>
@@ -459,6 +458,7 @@
         </div>
     </div>
 </div>
+
 <div class="popup" id="free_visit_form">
     <div class="overlay">
     </div>
@@ -472,9 +472,8 @@
             <form class="popup-form" name="free-visit-form" id="form2" action="#" method="post">
                 <h4>Записаться на визит</h4>
                 <input type="hidden" name="form_name" value=" Записаться на визит">
-                <p class="input-text"><input name="name" type="text" required placeholder="Ваше имя..."></p>
-                <p class="input-text"><input type="tel" name="phone" id="callback_form2-phone" required
-                                             placeholder="Ваш номер телефона..."></p>
+                <p class="input-text"><input name="name" type="text" placeholder="Ваше имя..." required pattern = "^[а-яА-ЯёЁ ?]+$"></p>
+                <p class="input-text"><input type="tel" name="phone" id="callback_form2-phone" placeholder="Ваш номер телефона..." required pattern = "^\+375( )?(( )?\d){9}$|^\+?[78]([-()]*\d){10}$"></p>
                 <p class="personal-data">
                     <input class="checkbox-dinamic" type="checkbox" required id="check2"><label for="check2">Я согласен на обработку <br>персональных
                     данных</label>
