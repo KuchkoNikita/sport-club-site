@@ -12,9 +12,8 @@
 </head>
 <body>
 <div class="container">
-<div class="fixed-gift">
-    <img src=images/gift.png alt>
-</div>
+<a class="fixed-gift open-popup" href="#" data-popup="#gift"><img src=images/gift.png class="img-gift"></a>
+
 <header id="header-main" class="header-main">
     <div class="head">
         <div class="wrapper">
@@ -44,7 +43,7 @@
                             <span>Звоните круглосуточно!</span>
                             <p>+7 (800) 555-64-47</p>
                         </div>
-                        <button class="btn callback-btn" data-popup="#callback_form">Перезвоните мне</button>
+                        <button class="btn callback-btn open-popup" data-popup="#callback_form">Перезвоните мне</button>
                     </div>
                 </div>
             </div>
@@ -59,7 +58,7 @@
                 <li class="scroll"><a href="#gallery">Галерея</a></li>
                 <li class="scroll"><a href="#footer">Контакты</a></li>
             </ul>
-            <div class="menu-button hidden-large">
+            <div class="menu-button hidden-large open-popup">
                 <img src="images/menu-button.png" alt="">
             </div>
         </div>
@@ -297,7 +296,7 @@
         </div>
     </div>
 </section>
-<section id="cards">
+<section id="cards" class = "main-calculator">
     <div class="wrapper">
         <h2>Клубные карты</h2>
         <div class="content">
@@ -307,13 +306,13 @@
             <div class="right">
                 <form class="static-form" action="" id="card_order">
                     <div class="time">
-                        <input id="m1" class="card-type" type="radio" name="card-type" value="1" checked> <!--1-->
+                        <input id="m1" class="card-type calculator-tabs" type="radio" name="card-type" value="1" checked> <!--1-->
                         <label for="m1">1 месяц</label>
-                        <input id="m2" class="card-type" type="radio" name="card-type" value="6"> <!--6-->
+                        <input id="m2" class="card-type  calculator-tabs" type="radio" name="card-type" value="6"> <!--6-->
                         <label for="m2">6 месяцев</label>
-                        <input id="m3" class="card-type" type="radio" name="card-type" value="9"> <!--9-->
+                        <input id="m3" class="card-type  calculator-tabs" type="radio" name="card-type" value="9"> <!--9-->
                         <label for="m3">9 месяцев</label>
-                        <input id="m4" class="card-type" type="radio" name="card-type" value="12"> <!--12-->
+                        <input id="m4" class="card-type  calculator-tabs" type="radio" name="card-type" value="12"> <!--12-->
                         <label for="m4">12 месяцев</label>
                     </div>
                     <div class="club">
@@ -477,7 +476,6 @@
                 <p class="personal-data">
                     <input class="checkbox-dinamic" type="checkbox" required id="check2"><label for="check2">Я согласен на обработку <br>персональных
                     данных</label>
-
                 </p>
                 <button name="send1" class="btn btn-send" type="submit">записаться</button>
             </form>

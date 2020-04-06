@@ -5,11 +5,11 @@ let closePopupAfterSendForm;
 let thanksPopup;
 let sorryPopup;
 
-const popup = () => {
+const popupAndForm = () => {
     const inputСleaning = (block) => {
         const inputs = block.querySelectorAll('input');
         inputs.forEach((item) => {
-            if (!item.classList.contains('card-type') && !item.classList.contains('type-club')) {
+            if (!item.classList.contains('calculator-tabs') && !item.classList.contains('type-club')) {
                 item.value = '';
             }
             if (item.classList.contains('checkbox-dinamic')) {
@@ -32,48 +32,7 @@ const popup = () => {
         }, time);
     };
 
-    const openingBlock = (button, block, captureContent) => {
-        button.addEventListener('click', (event) => {
-            event.preventDefault();
-
-            let count = -20;
-            block.style.display = 'block';
-            captureContent.style.top = '100%';
-
-            const animationBlock = () => {
-                count++;
-                captureContent.style.top = count + "%";
-                if (count < 20) {
-                    requestAnimationFrame(animationBlock);
-                }
-            };
-
-            requestAnimationFrame(animationBlock);
-            //document.querySelector('.fixed-gift').style.display = 'none';
-        });
-
-    };
-
-    const closingBlock = (button, block, captureContent) => {
-        block.addEventListener('click', (event) => {
-            let target = event.target;
-
-            if (target.classList.contains(button)) {
-                block.style.display = 'none';
-                inputСleaning(block);
-            } else {
-                target = target.closest(captureContent);
-
-                if (!target) {
-                    block.style.display = 'none';
-                    inputСleaning(block);
-                }
-            }
-            // document.querySelector('.fixed-gift').style.display = 'block';
-        });
-    };
-
-    const openingThanksOrSorryPopup = (block, captureContent) => {
+    const openingBlock = (block, captureContent) => {
         let count = -20;
         block.style.display = 'block';
         captureContent.style.top = '100%';
@@ -85,9 +44,52 @@ const popup = () => {
                 requestAnimationFrame(animationBlock);
             }
         };
-
         requestAnimationFrame(animationBlock);
-        //document.querySelector('.fixed-gift').style.display = 'none';
+        if (block.id === 'gift') { 
+            const fixedGift = document.querySelector('.fixed-gift');
+            fixedGift.style.display = 'none';
+        };
+    };
+
+    const closingBlock = (button, block, captureContent, event) => {
+        let target = event.target;
+
+        if (target.classList.contains(button)) {
+            block.style.display = 'none';
+            inputСleaning(block);
+        } else {
+            target = target.closest(captureContent);
+
+            if (!target) {
+                block.style.display = 'none';
+                inputСleaning(block);
+            }
+        }
+    };
+
+    thanksPopup = () => {
+        const thanks = document.querySelector('#thanks');
+        const formContent = thanks.querySelector('.form-content');
+
+        openingBlock(thanks, formContent);
+        thanks.addEventListener('click', (event) => {
+            closingBlock('close-btn', thanks, '.form-content', event);
+        });
+
+        thanks.style.display = 'block';
+
+    };
+
+    sorryPopup = () => {
+        const sorry = document.querySelector('#sorry');
+        const formContent = sorry.querySelector('.form-content');
+
+        openingBlock(sorry, formContent);
+        sorry.addEventListener('click', (event) => {
+            closingBlock('close-btn', sorry, '.form-content', event);
+        });
+
+        sorry.style.display = 'block';
     };
 
     const clubsPopup = () => {
@@ -99,40 +101,6 @@ const popup = () => {
         });
     };
     clubsPopup();
-
-    const freeVisitFormPopup = () => {
-        const openPopup = document.querySelector('.open-popup');
-        const freeVisitForm = document.querySelector('#free_visit_form');
-        const formContent = freeVisitForm.querySelector('.form-content');
-
-        openingBlock(openPopup, freeVisitForm, formContent);
-        closingBlock('close_icon', freeVisitForm, '.form-content');
-    };
-    freeVisitFormPopup();
-
-    const callbackFormPopup = () => {
-        const callbackBtn = document.querySelector('.callback-btn');
-        const callbackForm = document.querySelector('#callback_form');
-        const formContent = callbackForm.querySelector('.form-content');
-
-        openingBlock(callbackBtn, callbackForm, formContent);
-        closingBlock('close_icon', callbackForm, '.form-content');
-    };
-    callbackFormPopup();
-
-    const giftPopup = () => {
-        const fixedGift = document.querySelector('.fixed-gift');
-        const gift = document.querySelector('#gift');
-        const formContent = gift.querySelector('.form-content');
-
-        openingBlock(fixedGift, gift, formContent);
-        closingBlock('close-btn', gift, '.form-content');
-
-        fixedGift.addEventListener('click', () => {
-            fixedGift.style.display = 'none';
-        });
-    };
-    giftPopup();
 
     const menuButton = () => {
         const menuButton = document.querySelector('.menu-button');
@@ -155,64 +123,52 @@ const popup = () => {
     };
     menuButton();
 
-    thanksPopup = () => {
-        const thanks = document.querySelector('#thanks');
-        const formContent = thanks.querySelector('.form-content');
+    const staticFormClearing = () => {
+        const staticForm = document.querySelectorAll('.static-form');
 
-        openingThanksOrSorryPopup(thanks, formContent);
-        closingBlock('close-btn', thanks, '.form-content');
-
-        thanks.style.display = 'block';
-
-    };
-
-    sorryPopup = () => {
-        const sorry = document.querySelector('#sorry');
-        const formContent = sorry.querySelector('.form-content');
-
-        openingThanksOrSorryPopup(sorry, formContent);
-        closingBlock('close-btn', sorry, '.form-content');
-
-        sorry.style.display = 'block';
-    };
-
-    /* forms */
-    const bannerForm = () => {
-        const bannerForm = document.querySelector('#banner-form');
-
-        bannerForm.addEventListener('submit', () => {
-            setTimeout(() => {
-                inputСleaning(bannerForm);
-            }, 5000);
+        staticForm.forEach(item => {
+            item.addEventListener('submit', () => {
+                setTimeout(() => {
+                    inputСleaning(item);
+                }, 5000);
+            });
         });
     };
-    bannerForm();
+    staticFormClearing();
+    
+    const callPopup = () => {
+        const popupButtons = document.querySelectorAll('.open-popup');
+        const popup = document.querySelectorAll('.popup');
 
-    const cardOrder = () => {
-        const cardOrder = document.querySelector('#card_order');
+        popupButtons.forEach((item) => {
+            item.addEventListener('click', () => {
+                let target = event.target;
+                if (target.className === 'img-gift') { target = target.parentElement; }
+                const popup = document.querySelector(target.dataset.popup);
+                const formContent = popup.querySelector('.form-content');
+                openingBlock(popup, formContent);
+            });
+        });
 
-        cardOrder.addEventListener('submit', () => {
-            setTimeout(() => {
-                inputСleaning(cardOrder);
-            }, 5000);
+        popup.forEach((item) => {
+            item.addEventListener(('click'), (event) => {
+                if (item.id === 'gift' || item.id === 'thanks' || item.id === 'sorry') { 
+                    closingBlock('close-btn', item, '.form-content', event);
+                }
+                else { 
+                    closingBlock('close_icon', item, '.form-content', event); 
+                }
+            });
         });
     };
-    cardOrder();
-
-    const footerForm = () => {
-        const footerForm = document.querySelector('#footer_form');
-
-        footerForm.addEventListener('submit', () => {
-            setTimeout(() => {
-                inputСleaning(footerForm);
-            }, 5000);
-        });
-    };
-    footerForm();
+    callPopup();
 };
-popup();
+popupAndForm();
 
 const calculator = () => {
+    const mainCalculator = document.querySelector('.main-calculator');
+    if ( !mainCalculator ) return; 
+    
     const priceTotal = document.querySelector('#price-total');
     const cardType = document.querySelectorAll('.card-type');
     const inputCode = document.querySelector('.input-code');
@@ -296,10 +252,8 @@ const calculator = () => {
         subscriptionAssignment();
         dataСounting();
     });
-
 };
 calculator();
-
 
 const animationLinks = () => {
     const animation = (button, className, navigation = false) => {
@@ -308,13 +262,13 @@ const animationLinks = () => {
             let target = event.target;
 
             if (navigation) {
-                if( target.classList.contains('scroll') ) { target = event.target.firstChild; }
+                if ( target.classList.contains('scroll') ) { target = event.target.firstChild; }
             } else {
                 if (target.id !== className) { target = event.target.parentElement; }   
             }
     
             const blockID = target.getAttribute('href').substr(1);
-    
+            
             document.getElementById(blockID).scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
@@ -398,9 +352,9 @@ const sendForm = () => {
             }
 
             let body = {};
-            if (form.id === 'card_order') {
+            if (form.id === 'card_order' && form.querySelector('#price-total')) {
                 body = {
-                    coast: document.querySelector('#price-total').textContent
+                    coast: form.querySelector('#price-total').textContent
                 };
             }
             const formData = new FormData(form);
@@ -599,7 +553,5 @@ const slider = (sliderClass, sliderItemClass, dots, arrows, slideCount, time) =>
 
     startSlide(time);
 };
-
 slider(`.main-slider`, `.slide`, true, false, 1, 5000);
 slider(`.gallery-bg`, `.slide`, true, true, 1, 5000);
-//caruselSlider('.services-slider', '.slide', true, 6, 5000);
