@@ -325,13 +325,13 @@ menuBlock();
 const sendForm = () => {
     const errorMessage = 'Что-то пошло не так...';
     const loadMessage = 'Загрузка...';
-    const successMessage = 'Спасибо! Мы скоро с вами свяжемся';
+    const successMessage = 'Ваша форма отправлена!';
 
     const popupForm = document.querySelectorAll('.popup-form');
     const staticForm = document.querySelectorAll('.static-form');
 
     const statusMassage = document.createElement('div');
-    statusMassage.style.cssText = 'font-size: 2rem;';
+    statusMassage.style.cssText = `font-size: 2rem; color: #fff;`;
 
     const postData = (obj) => {
         return fetch('./server.php', {
@@ -346,8 +346,8 @@ const sendForm = () => {
     const messagePost = (form) => {
         form.addEventListener('submit', (event) => {
             event.preventDefault();
-            form.appendChild(statusMassage);
             if (form.classList.contains('popup-form')) {
+                form.appendChild(statusMassage);
                 statusMassage.textContent = loadMessage;
             }
 
@@ -373,7 +373,9 @@ const sendForm = () => {
                     if (form.classList.contains('static-form')) {
                         thanksPopup();
                     } else {
-                        statusMassage.textContent = successMessage;
+                        if (form.classList.contains('popup-form')) { 
+                            statusMassage.textContent = successMessage; 
+                        }
                     }
                 })
                 .catch((error) => {
@@ -399,15 +401,15 @@ const sendForm = () => {
 sendForm();
 
 const slider = (sliderClass, sliderItemClass, dots, arrows, slideCount, time) => {
-    const slider = document.querySelector(sliderClass),
-        slide = slider.querySelectorAll(sliderItemClass);
+    const slider = document.querySelector(sliderClass);
+    const slide = slider.querySelectorAll(sliderItemClass);
 
     const createDots = () => {
-        const ul = document.createElement(`ul`);
+        const ul = document.createElement('ul');
         ul.setAttribute("class", "slider-dots");
         slider.appendChild(ul);
         for (let i = 0; i < slide.length; i++) {
-            const ul = slider.querySelector(`.slider-dots`),
+            const ul = slider.querySelector('.slider-dots'),
                 li = document.createElement(`li`);
             if (i === 0) {
                 li.setAttribute("class", "dot dot-active");
@@ -420,8 +422,8 @@ const slider = (sliderClass, sliderItemClass, dots, arrows, slideCount, time) =>
     };
 
     const createArrows = () => {
-        const btnPrev = document.createElement(`a`),
-            btnNext = document.createElement(`a`);
+        const btnPrev = document.createElement('a');
+        const btnNext = document.createElement('a');
         btnPrev.setAttribute("class", "slider-btn prev");
         btnPrev.setAttribute("id", "arrow-left");
         slider.appendChild(btnPrev);
@@ -431,14 +433,10 @@ const slider = (sliderClass, sliderItemClass, dots, arrows, slideCount, time) =>
         slider.appendChild(btnNext);
     };
 
-    if (dots) {
-        createDots();
-    }
-    if (arrows) {
-        createArrows();
-    }
+    if (dots) { createDots(); }
+    if (arrows) { createArrows(); }
 
-    const dot = slider.querySelectorAll(`.dot`);
+    const dot = slider.querySelectorAll('.dot');
 
     let firstSlide = 0,
         lastSlide = slideCount,
@@ -458,9 +456,9 @@ const slider = (sliderClass, sliderItemClass, dots, arrows, slideCount, time) =>
     };
 
     const autoPlaySlide = () => {
-        prevSlide(slide, firstSlide, lastSlide, `slide-active`);
+        prevSlide(slide, firstSlide, lastSlide, 'slide-active');
         if (dots) {
-            prevSlide(dot, firstSlide, lastSlide, `dot-active`);
+            prevSlide(dot, firstSlide, lastSlide, 'dot-active');
         }
 
         firstSlide++;
@@ -473,9 +471,9 @@ const slider = (sliderClass, sliderItemClass, dots, arrows, slideCount, time) =>
             stopSlide();
         }
 
-        nextSlide(slide, firstSlide, lastSlide, `slide-active`);
+        nextSlide(slide, firstSlide, lastSlide, 'slide-active');
         if (dots) {
-            nextSlide(dot, firstSlide, lastSlide, `dot-active`);
+            nextSlide(dot, firstSlide, lastSlide, 'dot-active');
         }
     };
 
@@ -487,30 +485,30 @@ const slider = (sliderClass, sliderItemClass, dots, arrows, slideCount, time) =>
         clearInterval(interval);
     };
 
-    slider.addEventListener(`click`, (event) => {
+    slider.addEventListener('click', (event) => {
         event.preventDefault();
         let target = event.target;
         if (!target.matches('.slider-btn, .dot')) {
             return;
         }
 
-        prevSlide(slide, firstSlide, lastSlide, `slide-active`);
+        prevSlide(slide, firstSlide, lastSlide, 'slide-active');
         if (dots) {
-            prevSlide(dot, firstSlide, lastSlide, `dot-active`);
+            prevSlide(dot, firstSlide, lastSlide, 'dot-active');
         }
 
-        if (target.matches(`#arrow-right`)) {
+        if (target.matches('#arrow-right')) {
             if (slideCount > 1) {
                 lastSlide++;
             }
             firstSlide++;
-        } else if (target.matches(`#arrow-left`)) {
+        } else if (target.matches('#arrow-left')) {
             if (slideCount > 1) {
                 lastSlide--;
             }
             firstSlide--;
             lastSlide++;
-        } else if (target.matches(`.dot`)) {
+        } else if (target.matches('.dot')) {
             dot.forEach((elem, index) => {
                 if (elem === target) {
                     firstSlide = index;
@@ -531,27 +529,116 @@ const slider = (sliderClass, sliderItemClass, dots, arrows, slideCount, time) =>
         if (slideCount > 1 && firstSlide < 0) {
             stopSlide();
         }
-        nextSlide(slide, firstSlide, lastSlide, `slide-active`);
+        nextSlide(slide, firstSlide, lastSlide, 'slide-active');
         if (dots) {
-            nextSlide(dot, firstSlide, lastSlide, `dot-active`);
+            nextSlide(dot, firstSlide, lastSlide, 'dot-active');
         }
     });
 
-    slider.addEventListener(`mouseover`, (event) => {
-        if (event.target.matches(`.slider-btn`) ||
-            event.target.matches(`.dot`)) {
+    slider.addEventListener('mouseover', (event) => {
+        if (event.target.matches('.slider-btn') ||
+            event.target.matches('.dot')) {
             stopSlide();
         }
     });
     
-    slider.addEventListener(`mouseout`, (event) => {
-        if (event.target.matches(`.slider-btn`) ||
-            event.target.matches(`.dot`)) {
+    slider.addEventListener('mouseout', (event) => {
+        if (event.target.matches('.slider-btn') ||
+            event.target.matches('.dot')) {
             startSlide();
         }
     });
 
     startSlide(time);
 };
-slider(`.main-slider`, `.slide`, true, false, 1, 5000);
-slider(`.gallery-bg`, `.slide`, true, true, 1, 5000);
+slider('.main-slider', '.slide', true, false, 1, 5000);
+slider('.gallery-bg', '.slide', true, true, 1, 5000);
+
+const sliderCarusel = (sliderClass, sliderItemClass, arrows, slideCount, time) => {
+    const slider = document.querySelector(sliderClass);
+    const slide = slider.querySelectorAll(sliderItemClass);
+    const sliderBlock = slider.querySelector('.slider-block');
+    let interval;
+    
+    const createArrows = () => {
+        const btnPrev = document.createElement(`a`),
+            btnNext = document.createElement(`a`);
+        btnPrev.setAttribute("class", "slider-btn prev");
+        btnPrev.setAttribute("id", "arrow-left");
+        slider.appendChild(btnPrev);
+
+        btnNext.setAttribute("class", "slider-btn next");
+        btnNext.setAttribute("id", "arrow-right");
+        slider.appendChild(btnNext);
+    };    
+    if (arrows) { createArrows(); }
+
+    const buildSlider = () => {
+        const sliders = sliderBlock.querySelectorAll('.slide');
+        sliders.forEach(item => {
+            item.classList.remove('slide-active');
+        });
+
+        for (let i = 0; i < slideCount; i++) {
+            sliders[i].classList.add(`slide-active`);
+        }
+    };
+
+    const nextSlide = () => {
+        const last = sliderBlock.lastElementChild;
+        const lastClone = last.cloneNode(true); 
+        sliderBlock.insertAdjacentElement(`afterbegin`, lastClone);
+        last.parentNode.removeChild(last);
+    };
+
+    const prevSlide = () => {
+        const first = sliderBlock.firstElementChild;
+        const firstClone = first.cloneNode(true); 
+        sliderBlock.insertAdjacentElement(`afterbegin`, firstClone);
+        first.parentNode.removeChild(first);
+    };
+
+    const moveSliders = (str) => {
+        if (str === 'next') { nextSlide(); }
+        else if (str === 'prev') { prevSlide(); }
+        buildSlider();
+    };
+
+    const autoPlaySlide = () => {
+        moveSliders('next');
+    };
+
+    const startSlide = (time = 1500) => {
+        interval = setInterval(autoPlaySlide, time);
+    };
+    startSlide(time);
+
+    const stopSlide = () => {
+        clearInterval(interval);
+    };
+
+    const mouseTracking = (event, callback) => {
+        if (event.target.matches(`.slider-btn`) || event.target.matches(`.dot`)) { callback(); } 
+    };
+
+    slider.addEventListener('mouseover', (event) => {
+        mouseTracking(event, stopSlide);
+    });
+    
+    slider.addEventListener('mouseout', (event) => {
+        mouseTracking(event, startSlide);
+    });
+
+    const nextArrow = slider.querySelector('.next');
+    const prevArrow = slider.querySelector('.prev');
+
+    nextArrow.addEventListener('click', (event) => {
+        event.preventDefault();
+        moveSliders('next');
+    });
+    prevArrow.addEventListener('click', (event) => {
+        event.preventDefault();
+        moveSliders('prev');
+    });
+};
+sliderCarusel('.services-slider', '.slide', true, 5, 5000);
