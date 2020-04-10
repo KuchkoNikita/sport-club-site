@@ -1,5 +1,10 @@
 'use strict';
 
+import thanksPopup from './popupAndForm/thanksPopup';
+import sorryPopup from './popupAndForm/sorryPopup';
+import deleteMessage from './popupAndForm/deleteMessage';
+import closePopupAfterSendForm from './popupAndForm/closePopupAfterSendForm';
+
 const sendForm = () => {
     const errorMessage = 'Что-то пошло не так...';
     const loadMessage = 'Загрузка...';
@@ -65,7 +70,7 @@ const sendForm = () => {
                     console.warn(error);
                 });
 
-            deleteMessage(statusMassage, 5000);
+                deleteMessage(statusMassage, 5000);
             if (form.classList.contains('popup-form')) {
                 closePopupAfterSendForm(form, 5000);
             }

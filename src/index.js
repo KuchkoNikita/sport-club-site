@@ -1,14 +1,32 @@
 'use strict';
 
+
+import '@babel/polyfill';
+import 'nodelist-foreach-polyfill';
+import 'es6-promise';
+import 'fetch-polyfill';
+import elementCloasest from 'element-closest';
+elementCloasest(window);
+
+
 import animationLinks from './moduls/animationLinks';
 import calculator from './moduls/calculator';
 import menuBlock from './moduls/menuBlock';
-import popupAndForm from './moduls/popupAndForm';
+// Popups
+import clubsPopup from './moduls/popupAndForm/clubsPopup';
+import menuButton from './moduls/popupAndForm/menuButton';
+import staticFormClearing from './moduls/popupAndForm/staticFormClearing';
+import callPopup from './moduls/popupAndForm/callPopup';
+
 import sendForm from './moduls/sendForm';
 import slider from './moduls/slider';
 import sliderCarusel from './moduls/sliderCarusel';
 
-popupAndForm();
+clubsPopup();
+menuButton();
+staticFormClearing();
+callPopup();
+
 calculator();
 animationLinks();
 menuBlock();
